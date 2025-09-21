@@ -22,8 +22,7 @@
 ### 1. 프로젝트 클론
 
 ```bash
-git clone [your-repository-url]
-cd [project-directory]
+git clone https://github.com/bdgom73/kafka-default-test.git
 ```
 
 ### 2. Docker를 사용하여 Kafka 실행하기
@@ -68,15 +67,15 @@ IntelliJ나 Eclipse 같은 IDE에서 프로젝트를 열고 메인 애플리케�
 ### 사용자 생성 및 메시지 발행
 
 -   **Method**: `POST`
--   **Endpoint**: `/users`
--   **Parameter**: `name` (String)
+-   **Endpoint**: `/api/v1/messages`
+-   **Parameter**: `message` (String)
 
 #### cURL 예제
 
 터미널에서 아래 명령어를 실행하여 테스트할 수 있습니다.
 
 ```bash
-curl -X POST http://localhost:8080/users -d "name=gemini"
+curl -X POST http://localhost:8080/api/v1/messages -d "message=test"
 ```
 
 #### 성공 시
@@ -86,4 +85,4 @@ curl -X POST http://localhost:8080/users -d "name=gemini"
 #### 실패 시 (예제 코드 기준)
 1.  **Producer**: 메시지 발행 로그가 출력됩니다.
 2.  **Consumer**: 메시지 수신 후, 에러 로그와 함께 설정된 횟수만큼 재시도가 발생합니다.
-3.  **DLQ**: 최종 실패 후, 메시지는 `{원본토픽}.DLT` 토픽 (예: `user-created-topic.DLT`)으로 전송됩니다.
+3.  **DLQ**: 최종 실패 후, 메시지는 `{원본토픽}.DLT` 토픽 (예: `send-message-topic.DLT`)으로 전송됩니다.
